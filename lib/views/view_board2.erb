@@ -1,4 +1,7 @@
-<pre><%= $game.own_board_view $game.player_2 %></pre>
 <% if $player_2 == 'done' %>
+  <pre><%= $game.own_board_view $game.player_2 %></pre>
   <a href="/fire1">Done</a>
+<% elsif $player_2 == 'shot' %>
+  <pre><%= $game.opponent_board_view $game.player_2 %></pre>
+  <a href="/finish">Done</a>
 <% end %>

@@ -64,6 +64,17 @@ class McBattleships < Sinatra::Base
     erb :view_board1
   end
 
+  get '/fire2' do
+    erb :fire2
+  end
+
+  post '/fire2' do
+    $coords = params[:coords]
+    $game.player_2.shoot $coords.to_sym
+    $player_2 = 'shot'
+    erb :view_board2
+  end
+
   get '/finish' do
     erb :finish
   end
