@@ -32,6 +32,7 @@ class McBattleships < Sinatra::Base
     else
       $game.player_1.place_ship Ship.battleship, $coords
     end
+    $player_1 = 'done'
     erb :view_board1
   end
 
@@ -48,7 +49,19 @@ class McBattleships < Sinatra::Base
     else
       $game.player_2.place_ship Ship.battleship, $coords
     end
+    $player_2 = 'done'
     erb :view_board2
+  end
+
+  get '/fire1' do
+    erb :fire1
+  end
+
+  post '/fire1' do
+    $coords = params[:coords]
+    $game.player_1.shoot $coords.to_sym
+    $player_1 = 'shot'
+    erb :view_board1
   end
 
   get '/finish' do
