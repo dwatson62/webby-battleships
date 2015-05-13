@@ -60,18 +60,30 @@ class McBattleships < Sinatra::Base
   post '/fire1' do
     $coords = params[:coords]
     $game.player_1.shoot $coords.to_sym
-    $player_1 = 'shot'
+    if $game.player_1.winner?
+      $player_2 = 'dead'
+    else
+      $player_1 = 'shot'
+    end
     erb :view_board1
   end
 
   get '/fire2' do
-    erb :fire2
+    if $player_1 == 'dead' || $player_2 == 'dead'
+      erb :finish
+    else
+      erb :fire2
+    end
   end
 
   post '/fire2' do
     $coords = params[:coords]
     $game.player_2.shoot $coords.to_sym
-    $player_2 = 'shot'
+    if $game.player_2.winner?
+      $player_1 = 'dead'
+    else
+      $player_2 = 'shot'
+    end
     erb :view_board2
   end
 
