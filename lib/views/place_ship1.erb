@@ -1,6 +1,7 @@
 <pre><%= $game.own_board_view $game.player_1 %></pre>
-<span>Where to place ship: </span>
+<span>Where to place ship: <%= $name1 %></span>
 <form action="/game" method="post">
   <input type="text" name="coords">
+  <input type="text" name="direction">
   <input type="submit">
 </form>
