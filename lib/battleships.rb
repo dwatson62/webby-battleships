@@ -11,10 +11,6 @@ class McBattleships < Sinatra::Base
     erb :enter_name
   end
 
-  get '/name2' do
-    erb :enter_name2
-  end
-
   get '/game' do
     $name1 = params[:name1]
     $game = Game.new Player, Board
