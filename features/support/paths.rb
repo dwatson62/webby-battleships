@@ -22,6 +22,8 @@ module NavigationHelpers
 
       when /the place ship\s?page/
         '/place_ship'
+      when /the name\s?page/
+        '/enter_name'
     else
       raise "Can't find mapping from \"#{page_name}\" to a path.\n" +
         "Now, go and add a mapping in #{__FILE__}"

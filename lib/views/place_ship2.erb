@@ -2,6 +2,9 @@
 <span>Where to place ship: <%= $name2 %></span>
 <form action="/game2" method="post">
   <input type="text" name="coords">
-  <input type="text" name="direction">
+  <select name="direction">
+    <option value="Horizontal">Horizontal</option>
+    <option value="Vertical">Vertical</option>
+  </select>
   <input type="submit">
 </form>

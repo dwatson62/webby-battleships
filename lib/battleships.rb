@@ -3,10 +3,7 @@ require 'battleships'
 
 class McBattleships < Sinatra::Base
 
-  # set :session_secret, 'battleships'
-
   get '/' do
-    # session[:name] = "Ben"
     erb :index
   end
 
@@ -27,7 +24,7 @@ class McBattleships < Sinatra::Base
   post '/game' do
     $coords = params[:coords]
     $direction = params[:direction]
-    if $direction == 'vertical'
+    if $direction == 'Vertical'
       $game.player_1.place_ship Ship.battleship, $coords, $direction
     else
       $game.player_1.place_ship Ship.battleship, $coords
@@ -44,7 +41,7 @@ class McBattleships < Sinatra::Base
   post '/game2' do
     $coords = params[:coords]
     $direction = params[:direction]
-    if $direction == 'vertical'
+    if $direction == "Vertical"
       $game.player_2.place_ship Ship.battleship, $coords, $direction
     else
       $game.player_2.place_ship Ship.battleship, $coords
