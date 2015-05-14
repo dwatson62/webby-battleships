@@ -7,8 +7,3 @@ Feature: Starting the game
   Given I am on the homepage
   When I follow "New Game"
   Then I should see "What's your name?"
-
-  Scenario: Creating a game
-  Given I am on the homepage
-  When I follow "New Game"
-  Then a new game should be created
