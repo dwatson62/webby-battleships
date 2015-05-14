@@ -15,12 +15,9 @@ class McBattleships < Sinatra::Base
     erb :enter_name
   end
 
-  get '/name2' do
-    erb :enter_name2
-  end
-
   get '/game' do
     session[:name1] = params[:name1]
+    session[:name2] = params[:name2]
     @name1 = session[:name1]
     @player_1_own_board = @@game.own_board_view @@game.player_1
     erb :place_ship1
@@ -40,7 +37,6 @@ class McBattleships < Sinatra::Base
   end
 
   get '/game2' do
-    session[:name2] = params[:name2]
     @name2 = session[:name2]
     @player_2_own_board = @@game.own_board_view @@game.player_2
     erb :place_ship2
@@ -84,6 +80,7 @@ class McBattleships < Sinatra::Base
     @name1 = session[:name1]
     @name2 = session[:name2]
     if @@game.has_winner?
+      @player_2_state = 'dead' if @@game.player_1.winner?
       erb :finish
     else
       erb :fire2
