@@ -1,11 +1,19 @@
 Given(/^I am on the homepage$/) do
-  visit '/'
+  visit('/')
 end
 
-When(/^I follow "([^"]*)"$/) do |link_text|
+When(/^I click "([^"]*)"$/) do |link_text|
   click_link(link_text)
 end
 
 Then(/^I should see "([^"]*)"$/) do |text|
-  expect(page.has_content?(text)).to be_truthy
+  expect(page).to have_content(text)
+end
+
+When(/^I enter my name, "([^"]*)"$/) do |name|
+  fill_in('name1', :with => name)
+end
+
+When(/^I press submit$/) do
+  click_button 'Submit'
 end

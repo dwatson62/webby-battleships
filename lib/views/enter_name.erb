@@ -1,12 +1,5 @@
 <span>What's your name? </span>
-<% if $name1 == nil %>
   <form action="/game">
     <input type="text" name="name1">
-    <input type="submit">
+    <input type="submit" value="Submit">
   </form>
-<% else %>
-  <form action="/game2">
-    <input type="text" name="name2">
-    <input type="submit">
-  </form>
-<% end %>
