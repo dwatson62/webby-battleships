@@ -27,14 +27,14 @@ class McBattleships < Sinatra::Base
   end
 
   post '/game' do
-    $coords = params[:coords]
-    $direction = params[:direction]
-    if $direction == 'Vertical'
-      @@game.player_1.place_ship Ship.battleship, $coords, $direction
+    @coords = params[:coords]
+    @direction = params[:direction]
+    if @direction == 'Vertical'
+      @@game.player_1.place_ship Ship.battleship, @coords, @direction
     else
-      @@game.player_1.place_ship Ship.battleship, $coords
+      @@game.player_1.place_ship Ship.battleship, @coords
     end
-    $player_1 = 'done'
+    @player_1_state = 'done'
     @player_1_own_board = @@game.own_board_view @@game.player_1
     erb :view_board1
   end
@@ -47,15 +47,15 @@ class McBattleships < Sinatra::Base
   end
 
   post '/game2' do
-    $coords = params[:coords]
-    $direction = params[:direction]
+    @coords = params[:coords]
+    @direction = params[:direction]
     if $direction == "Vertical"
-      @@game.player_2.place_ship Ship.battleship, $coords, $direction
+      @@game.player_2.place_ship Ship.battleship, @coords, @direction
     else
-      @@game.player_2.place_ship Ship.battleship, $coords
+      @@game.player_2.place_ship Ship.battleship, @coords
     end
     @player_2_own_board = @@game.own_board_view @@game.player_2
-    $player_2 = 'done'
+    @player_2_state = 'done'
     erb :view_board2
   end
 
@@ -66,15 +66,15 @@ class McBattleships < Sinatra::Base
   end
 
   post '/fire1' do
-    $coords = params[:coords]
-    @@game.player_1.shoot $coords.to_sym
+    @coords = params[:coords]
+    @@game.player_1.shoot @coords.to_sym
     @@game.own_board_view @@game.player_1
     @player_1_own_board = @@game.own_board_view @@game.player_1
     @name1 = session[:name1]
     if @@game.player_1.winner?
-      $player_2 = 'dead'
+      @player_2_state = 'dead'
     else
-      $player_1 = 'shot'
+      @player_1_state = 'shot'
     end
     @player_1_opponent_board = @@game.opponent_board_view @@game.player_1
     erb :view_board1
@@ -83,7 +83,7 @@ class McBattleships < Sinatra::Base
   get '/fire2' do
     @player_2_opponent_board = @@game.opponent_board_view @@game.player_1
     @name2 = session[:name2]
-    if $player_1 == 'dead' || $player_2 == 'dead'
+    if @player_1_state == 'dead' || @player_2_state == 'dead'
       erb :finish
     else
       erb :fire2
@@ -91,13 +91,13 @@ class McBattleships < Sinatra::Base
   end
 
   post '/fire2' do
-    $coords = params[:coords]
-    @@game.player_2.shoot $coords.to_sym
+    @coords = params[:coords]
+    @@game.player_2.shoot @coords.to_sym
     @player_2_own_board = @@game.own_board_view @@game.player_2
     if @@game.player_2.winner?
-      $player_1 = 'dead'
+      @player_1_state = 'dead'
     else
-      $player_2 = 'shot'
+      @player_2_state = 'shot'
     end
     @player_2_opponent_board = @@game.opponent_board_view @@game.player_2
     erb :view_board2

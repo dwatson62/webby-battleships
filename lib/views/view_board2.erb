@@ -1,7 +1,7 @@
-<% if $player_2 == 'done' %>
+<% if @player_2_state == 'done' %>
   <pre><%= @player_2_own_board %></pre>
   <a href="/fire1">Done</a>
-<% elsif $player_2 == 'shot' %>
+<% elsif @player_2_state == 'shot' %>
   <pre><%= @player_2_opponent_board %></pre>
   <a href="/fire1">Done</a>
 <% end %>
