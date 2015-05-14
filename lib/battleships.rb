@@ -62,6 +62,7 @@ class McBattleships < Sinatra::Base
   get '/fire1' do
     @player_1_opponent_board = @@game.opponent_board_view @@game.player_1
     @name1 = session[:name1]
+    @name2 = session[:name2]
     if @@game.has_winner?
       erb :finish
     else
@@ -74,17 +75,13 @@ class McBattleships < Sinatra::Base
     @@game.player_1.shoot @coords.to_sym
     @@game.own_board_view @@game.player_1
     @name1 = session[:name1]
-    if @@game.player_1.winner?
-      @player_2_state = 'dead'
-    else
-      @player_1_state = 'shot'
-    end
     @player_1_opponent_board = @@game.opponent_board_view @@game.player_1
     erb :view_board1
   end
 
   get '/fire2' do
     @player_2_opponent_board = @@game.opponent_board_view @@game.player_1
+    @name1 = session[:name1]
     @name2 = session[:name2]
     if @@game.has_winner?
       erb :finish
@@ -96,19 +93,8 @@ class McBattleships < Sinatra::Base
   post '/fire2' do
     @coords = params[:coords]
     @@game.player_2.shoot @coords.to_sym
-    if @@game.player_2.winner?
-      @player_1_state = 'dead'
-    else
-      @player_2_state = 'shot'
-    end
     @player_2_opponent_board = @@game.opponent_board_view @@game.player_2
     erb :view_board2
-  end
-
-  get '/finish' do
-    @name1 = session[:name1]
-    @name2 = session[:name2]
-    erb :finish
   end
 
   # start the server if ruby file executed directly
