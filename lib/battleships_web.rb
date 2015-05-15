@@ -2,7 +2,7 @@ require 'sinatra/base'
 require 'battleships'
 
 class BattleshipsApp < Sinatra::Base
-  set :views, Proc.new { File.join(root, "..", "views") }
+  set :views, Proc.new { File.join(root, "views") }
   enable :sessions
 
   @@game = Game.new(Player, Board)

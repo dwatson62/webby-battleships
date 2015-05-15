@@ -14,6 +14,6 @@ When(/^I enter my name, "([^"]*)"$/) do |name|
   fill_in('name1', :with => name)
 end
 
-When(/^I press submit$/) do
-  click_button 'Submit'
+When(/^I click on "([^"]*)"$/) do |arg1|
+  click_on(arg1)
 end

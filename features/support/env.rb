@@ -14,6 +14,10 @@ class BattleshipsAppWorld
   include Capybara::DSL
   include RSpec::Expectations
   include RSpec::Matchers
+
+  def a_helper
+    @@game = Game.new(Player, Board)
+  end
 end
 
 World do
