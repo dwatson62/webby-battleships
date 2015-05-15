@@ -2,20 +2,20 @@
 
 ENV['RACK_ENV'] = 'test'
 
-require File.join(File.dirname(__FILE__), '..', '..', 'lib/battleships.rb')
+require File.join(File.dirname(__FILE__), '..', '..', 'lib/battleships_web.rb')
 
 require 'capybara'
 require 'capybara/cucumber'
 require 'rspec'
 
-Capybara.app = McBattleships
+Capybara.app = BattleshipsApp
 
-class McBattleshipsWorld
+class BattleshipsAppWorld
   include Capybara::DSL
   include RSpec::Expectations
   include RSpec::Matchers
 end
 
 World do
-  McBattleshipsWorld.new
+  BattleshipsAppWorld.new
 end
